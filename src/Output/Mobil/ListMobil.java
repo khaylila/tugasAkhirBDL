@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Output.Warna;
+package Output.Mobil;
 
+import Output.Warna.*;
 import Output.Customer.*;
 import Database.DB;
 import Output.FormLogin;
@@ -20,10 +21,10 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author milea
  */
-public class ListWarna extends javax.swing.JFrame {
+public class ListMobil extends javax.swing.JFrame {
 
-    ArrayList<Integer> listWarna = new ArrayList<>();
-    int warnaId;
+    ArrayList<Integer> listMobil = new ArrayList<>();
+    int mobilId;
     DB db;
 
     /**
@@ -31,13 +32,13 @@ public class ListWarna extends javax.swing.JFrame {
      *
      * @param userId
      */
-    public ListWarna(int userId) {
+    public ListMobil(int userId) {
         initComponents();
-        this.db = new DB(new String[]{"colors", "warna_id"});
+        this.db = new DB(new String[]{"cars", "mobil_id"});
         this.loadTabel();
     }
 
-    public ListWarna() {
+    public ListMobil() {
         new FormLogin().setVisible(true);
         this.setVisible(false);
         dispose();
@@ -53,17 +54,17 @@ public class ListWarna extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableWarna = new javax.swing.JTable();
+        tableMobil = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         inputSearch = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        inputWarna = new javax.swing.JTextField();
+        inputMobil = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        tableWarna.setModel(new javax.swing.table.DefaultTableModel(
+        tableMobil.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -89,19 +90,19 @@ public class ListWarna extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableWarna.addMouseListener(new java.awt.event.MouseAdapter() {
+        tableMobil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableWarnaMouseClicked(evt);
+                tableMobilMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tableWarna);
-        if (tableWarna.getColumnModel().getColumnCount() > 0) {
-            tableWarna.getColumnModel().getColumn(0).setResizable(false);
-            tableWarna.getColumnModel().getColumn(1).setResizable(false);
+        jScrollPane1.setViewportView(tableMobil);
+        if (tableMobil.getColumnModel().getColumnCount() > 0) {
+            tableMobil.getColumnModel().getColumn(0).setResizable(false);
+            tableMobil.getColumnModel().getColumn(1).setResizable(false);
         }
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
-        jLabel1.setText("Warna");
+        jLabel1.setText("Mobil");
 
         inputSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -139,7 +140,7 @@ public class ListWarna extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(102, 102, 102))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(inputWarna, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(inputMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -160,7 +161,7 @@ public class ListWarna extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inputWarna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputMobil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd)
                     .addComponent(btnDelete))
                 .addGap(18, 18, 18)
@@ -178,14 +179,14 @@ public class ListWarna extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_inputSearchKeyTyped
 
-    private void tableWarnaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableWarnaMouseClicked
+    private void tableMobilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMobilMouseClicked
         // TODO add your handling code here:
         JTable target = (JTable) evt.getSource();
         int row = target.getSelectedRow();
         int indexId = Integer.parseInt(target.getModel().getValueAt(row, 0).toString());
         System.out.println(indexId);
-        this.warnaId = listWarna.get(indexId - 1);
-    }//GEN-LAST:event_tableWarnaMouseClicked
+        this.mobilId = listMobil.get(indexId - 1);
+    }//GEN-LAST:event_tableMobilMouseClicked
 
     public void peringatan(String pesan) {
         JOptionPane.showMessageDialog(rootPane, pesan);
@@ -193,18 +194,18 @@ public class ListWarna extends javax.swing.JFrame {
     
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        String warna = inputWarna.getText().trim();
-        if (warna.isEmpty()) {
-            this.peringatan("Warna tidak boleh kosong!");
+        String mobil = inputMobil.getText().trim();
+        if (mobil.isEmpty()) {
+            this.peringatan("Mobil tidak boleh kosong!");
         } else {
             try {
-                String query = "INSERT INTO colors(warna_nama) VALUES(?);";
+                String query = "INSERT INTO cars(mobil_nama) VALUES(?);";
                 PreparedStatement preparedStatement = db.getPrepStatement(query);
-                preparedStatement.setString(1, warna);
+                preparedStatement.setString(1, mobil);
                 if (preparedStatement.executeUpdate() <= 0) {
-                    this.peringatan("Gagal menyimpan warna!");
+                    this.peringatan("Gagal menyimpan mobil!");
                 } else {
-                    this.peringatan("Berhasil menyimpan warna!");
+                    this.peringatan("Berhasil menyimpan mobil!");
                     loadTabel();
                 }
             } catch (SQLException e) {
@@ -216,13 +217,13 @@ public class ListWarna extends javax.swing.JFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         try{
-            String query = "DELETE FROM customer WHERE customer_id=?;";
+            String query = "DELETE FROM cars WHERE mobil_id=?;";
             PreparedStatement prepareStatement = db.getPrepStatement(query);
-            prepareStatement.setInt(1, warnaId);
+            prepareStatement.setInt(1, mobilId);
             if(prepareStatement.executeUpdate() <= 0){
-                this.peringatan("Gagal menghapus warna!");
+                this.peringatan("Gagal menghapus mobil!");
             }else{
-                this.peringatan("Berhasil menghapus warna!");
+                this.peringatan("Berhasil menghapus mobil!");
                 loadTabel();
             }
         }catch(SQLException e){
@@ -232,12 +233,13 @@ public class ListWarna extends javax.swing.JFrame {
 
     public void loadTabel() {
         String search = inputSearch.getText();
-        DefaultTableModel model = (DefaultTableModel) tableWarna.getModel();
+        DefaultTableModel model = (DefaultTableModel) tableMobil.getModel();
         model.setRowCount(0);
         try {
-            String query = "SELECT * FROM colors;";
+            String query = "SELECT * FROM cars;";
             if (!search.equals("")) {
-                query = "SELECT * FROM colors WHERE warna_nama LIKE ?;";
+                query = "SELECT * FROM cars WHERE mobil_nama LIKE ?;";
+                System.out.println(query);
             }
             PreparedStatement preparedStatement = db.getPrepStatement(query);
             if (!search.equals("")) {
@@ -246,12 +248,12 @@ public class ListWarna extends javax.swing.JFrame {
             ResultSet result = preparedStatement.executeQuery();
 
             int i = 1;
-            listWarna.clear();
+            listMobil.clear();
             while (result.next()) {
                 Object[] baris = new Object[2];
                 baris[0] = i++;
-                listWarna.add(result.getInt("warna_id"));
-                baris[1] = result.getString("warna_nama");
+                listMobil.add(result.getInt("mobil_id"));
+                baris[1] = result.getString("mobil_nama");
                 model.addRow(baris);
             }
         } catch (SQLException e) {
@@ -276,21 +278,23 @@ public class ListWarna extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListWarna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListMobil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListWarna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListMobil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListWarna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListMobil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListWarna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListMobil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListWarna().setVisible(true);
+                new ListMobil().setVisible(true);
             }
         });
     }
@@ -298,11 +302,11 @@ public class ListWarna extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JTextField inputMobil;
     private javax.swing.JTextField inputSearch;
-    private javax.swing.JTextField inputWarna;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableWarna;
+    private javax.swing.JTable tableMobil;
     // End of variables declaration//GEN-END:variables
 }

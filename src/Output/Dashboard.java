@@ -5,6 +5,7 @@
 package Output;
 
 import Output.Customer.ListCustomer;
+import Output.Mobil.ListMobil;
 import Output.Warna.ListWarna;
 
 /**
@@ -64,6 +65,11 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         btnMobil.setText("Mobil");
+        btnMobil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMobilActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,8 +112,13 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void btnWarnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWarnaActionPerformed
         // TODO add your handling code here:
-        new ListWarna().setVisible(true);
+        new ListWarna(userId).setVisible(true);
     }//GEN-LAST:event_btnWarnaActionPerformed
+
+    private void btnMobilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMobilActionPerformed
+        // TODO add your handling code here:
+        new ListMobil(userId).setVisible(true);
+    }//GEN-LAST:event_btnMobilActionPerformed
 
     /**
      * @param args the command line arguments
