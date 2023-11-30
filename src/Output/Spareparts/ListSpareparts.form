@@ -30,8 +30,6 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btnAddCustomer" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="filterBy" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="inputSearch" min="-2" pref="199" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -52,7 +50,6 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnAddCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="inputSearch" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="filterBy" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="248" max="32767" attributes="0"/>
@@ -72,8 +69,8 @@
               <Table columnCount="5" rowCount="4">
                 <Column editable="false" title="No" type="java.lang.String"/>
                 <Column editable="false" title="Nama" type="java.lang.String"/>
-                <Column editable="false" title="Telpon" type="java.lang.String"/>
-                <Column editable="false" title="Alamat" type="java.lang.String"/>
+                <Column editable="false" title="Qty" type="java.lang.String"/>
+                <Column editable="false" title="Harga Jual" type="java.lang.String"/>
                 <Column editable="false" title="Tgl Dibuat" type="java.lang.String"/>
               </Table>
             </Property>
@@ -129,26 +126,13 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Liberation Sans" size="24" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Customer"/>
+        <Property name="text" type="java.lang.String" value="Sparepart"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="inputSearch">
       <Events>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="inputSearchKeyTyped"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="filterBy">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
-            <StringItem index="0" value="Nama"/>
-            <StringItem index="1" value="Alamat"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

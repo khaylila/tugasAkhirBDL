@@ -5,26 +5,25 @@
 package Output;
 
 import Database.DB;
+import Database.Users;
 import Output.Customer.ListCustomer;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import org.mindrot.jbcrypt.BCrypt;
 import java.sql.Timestamp;
 import java.sql.SQLException;
+import java.util.Date;
 
 /**
  *
  * @author milea
  */
-public class FormRegister extends javax.swing.JFrame {
-
-    DB db;
+public class FormRegister extends MainFrame {
 
     /**
      * Creates new form Login
      */
     public FormRegister() {
-        this.db = new DB(new String[]{"users", "user_id"});
         initComponents();
     }
 
@@ -135,18 +134,14 @@ public class FormRegister extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void peringatan(String pesan) {
-        JOptionPane.showMessageDialog(rootPane, pesan);
-    }
-
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
         String fullname = inputFullname.getText();
         String email = inputEmail.getText();
         String password = new String(inputPassword.getPassword());
         String confPass = new String(inputPassword1.getPassword());
-        
-        if(fullname.isEmpty()||email.isEmpty()||password.isEmpty()||confPass.isEmpty()){
+
+        if (fullname.isEmpty() || email.isEmpty() || password.isEmpty() || confPass.isEmpty()) {
             this.peringatan("Parameter tidak boleh kosong!");
         } else if (!password.equals(confPass)) {
             this.peringatan("Password tidak sesuai!");
@@ -154,24 +149,23 @@ public class FormRegister extends javax.swing.JFrame {
             password = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
             try {
-                Timestamp currentTimeStamp = new Timestamp(System.currentTimeMillis());
-                String query = "INSERT INTO users (user_fullname, user_email, user_password, user_role, user_created_at, user_updated_at) VALUES (?, ?, ?, ?, ?, ?);";
-                PreparedStatement preparedStatement = db.getPrepStatement(query);
-                preparedStatement.setString(1, fullname);
-                preparedStatement.setString(2, email);
-                preparedStatement.setString(3, password);
-                preparedStatement.setInt(4, 1);
-                preparedStatement.setTimestamp(5, currentTimeStamp);
-                preparedStatement.setTimestamp(6, currentTimeStamp);
+                Users newUser = new Users();
+                Date date = new Date();
+                newUser.setUserFullname(fullname);
+                newUser.setUserEmail(email);
+                newUser.setUserPassword(password);
+                newUser.setUserRole(1);
+                newUser.setUserCreatedAt(date);
+                newUser.setUserUpdatedAt(date);
 
-                if (preparedStatement.executeUpdate() <= 0) {
-                    this.peringatan("Gagal menyimpan data!");
-                } else {
-                    this.peringatan("Berhasil menyimpan data!");
-                    this.dispose();
-                    new ListCustomer().setVisible(true);
-                }
-            } catch (SQLException e) {
+                entityManager.getTransaction().begin();
+                entityManager.persist(newUser);
+                this.peringatan("Berhasil menyimpan data user!");
+                this.dispose();
+                new ListCustomer().setVisible(true);
+            } catch (Exception e) {
+                entityManager.getTransaction().rollback();
+                this.peringatan("Gagal menyimpan data user");
                 e.printStackTrace();
             }
         }

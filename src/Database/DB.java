@@ -17,7 +17,7 @@ public class DB {
 
     protected final String DB_URL = "jdbc:postgresql://103.16.116.143:5432/bengkel_mobil";
     protected final String USER = "bdl_c_kelompok3";
-    protected final String PASS = "ezI54vXjRfhMs3Yn";
+    protected final String PASS = "";
     protected String table;
     protected String pk;
     protected Connection conn;

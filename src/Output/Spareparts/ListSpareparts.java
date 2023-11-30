@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Output.Supplier;
+package Output.Spareparts;
 
+import Output.Supplier.*;
 import Database.DB;
 import Output.FormLogin;
 import java.awt.event.KeyEvent;
@@ -18,9 +19,9 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author milea
  */
-public class ListSupplier extends javax.swing.JFrame {
+public class ListSpareparts extends javax.swing.JFrame {
 
-    ArrayList<Integer> listSupplier = new ArrayList<>();
+    ArrayList<Integer> listSparepart = new ArrayList<>();
     int userId;
     DB db;
 
@@ -29,14 +30,14 @@ public class ListSupplier extends javax.swing.JFrame {
      *
      * @param userId
      */
-    public ListSupplier(int userId) {
+    public ListSpareparts(int userId) {
         initComponents();
         this.userId = userId;
-        this.db = new DB(new String[]{"supplier", "supplier_id"});
+        this.db = new DB(new String[]{"spareparts", "sparepart_id"});
         this.loadTabel();
     }
 
-    public ListSupplier() {
+    public ListSpareparts() {
         new FormLogin().setVisible(true);
         this.setVisible(false);
         dispose();
@@ -56,7 +57,6 @@ public class ListSupplier extends javax.swing.JFrame {
         btnAddCustomer = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         inputSearch = new javax.swing.JTextField();
-        filterBy = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -68,7 +68,7 @@ public class ListSupplier extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "No", "Nama", "Telpon", "Alamat", "Tgl Dibuat"
+                "No", "Nama", "Qty", "Harga Jual", "Tgl Dibuat"
             }
         ) {
             Class[] types = new Class [] {
@@ -108,15 +108,13 @@ public class ListSupplier extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
-        jLabel1.setText("Customer");
+        jLabel1.setText("Sparepart");
 
         inputSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 inputSearchKeyTyped(evt);
             }
         });
-
-        filterBy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nama", "Alamat" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,8 +127,6 @@ public class ListSupplier extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAddCustomer)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(filterBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(inputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -145,8 +141,7 @@ public class ListSupplier extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddCustomer)
-                    .addComponent(inputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filterBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                 .addGap(21, 21, 21))
@@ -157,7 +152,7 @@ public class ListSupplier extends javax.swing.JFrame {
 
     private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
         // TODO add your handling code here:
-        new FormSupplier(this, userId).setVisible(true);
+        new FormSpareparts(this, userId).setVisible(true);
     }//GEN-LAST:event_btnAddCustomerActionPerformed
 
     private void inputSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputSearchKeyTyped
@@ -172,11 +167,9 @@ public class ListSupplier extends javax.swing.JFrame {
         JTable target = (JTable) evt.getSource();
         int row = target.getSelectedRow();
         int indexId = Integer.parseInt(target.getModel().getValueAt(row, 0).toString());
-        System.out.println(indexId);
-        int supplierId = listSupplier.get(indexId - 1);
-        System.out.println(supplierId);
+        int sparepartId = listSparepart.get(indexId - 1);
         
-        new FormSupplier(this, supplierId).setVisible(true);
+        new FormSpareparts(this, sparepartId).setVisible(true);
     }//GEN-LAST:event_tableCustomerMouseClicked
 
     public void loadTabel() {
@@ -184,12 +177,9 @@ public class ListSupplier extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tableCustomer.getModel();
         model.setRowCount(0);
         try {
-            String query = "SELECT * FROM supplier;";
+            String query = "SELECT * FROM spareparts;";
             if (!search.equals("")) {
-                query = "SELECT * FROM supplier WHERE supplier_nama LIKE ?;";
-                if (filterBy.getSelectedIndex() == 1) {
-                    query = "SELECT * FROM supplier WHERE suplier_alamat LIKE ?;";
-                }
+                query = "SELECT * FROM spareparts WHERE sparepart_nama LIKE ?;";
             }
             PreparedStatement preparedStatement = db.getPrepStatement(query);
             if (!search.equals("")) {
@@ -198,14 +188,15 @@ public class ListSupplier extends javax.swing.JFrame {
             ResultSet result = preparedStatement.executeQuery();
 
             int i = 1;
-            listSupplier.clear();
+            listSparepart.clear();
             while (result.next()) {
-                Object[] baris = new Object[4];
+                Object[] baris = new Object[5];
                 baris[0] = i++;
-                listSupplier.add(result.getInt("customer_id"));
-                baris[1] = result.getString("customer_fullname");
-                baris[2] = result.getString("customer_telepon");
-                baris[3] = result.getString("customer_alamat");
+                listSparepart.add(result.getInt("sparepart_id"));
+                baris[1] = result.getString("sparepart_nama");
+                baris[2] = result.getString("sparepart_qty");
+                baris[3] = result.getString("sparepart_harga");
+                baris[4] = result.getTimestamp("sparepart_created_at");
                 model.addRow(baris);
             }
         } catch (SQLException e) {
@@ -230,28 +221,33 @@ public class ListSupplier extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListSpareparts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListSpareparts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListSpareparts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListSpareparts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListSupplier().setVisible(true);
+                new ListSpareparts().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddCustomer;
-    private javax.swing.JComboBox<String> filterBy;
     private javax.swing.JTextField inputSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

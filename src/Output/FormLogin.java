@@ -5,26 +5,26 @@
 package Output;
 
 import Database.DB;
+import Database.Users;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.mindrot.jbcrypt.BCrypt;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import javax.persistence.TypedQuery;
 
 /**
  *
  * @author milea
  */
-public class FormLogin extends javax.swing.JFrame {
-
-    DB db;
+public class FormLogin extends MainFrame {
 
     /**
      * Creates new form Login
      */
     public FormLogin() {
-        this.db = new DB(new String[]{"users", "user_id"});
         initComponents();
     }
 
@@ -41,7 +41,7 @@ public class FormLogin extends javax.swing.JFrame {
         inputEmail = new javax.swing.JTextField();
         inputPassword = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,10 +54,10 @@ public class FormLogin extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Register");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRegisterActionPerformed(evt);
             }
         });
 
@@ -74,7 +74,7 @@ public class FormLogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnLogin)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(btnRegister)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -89,7 +89,7 @@ public class FormLogin extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
-                    .addComponent(jButton1))
+                    .addComponent(btnRegister))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -109,34 +109,32 @@ public class FormLogin extends javax.swing.JFrame {
         } else {
             System.out.println(email);
             try {
-                String query = "SELECT user_id,user_password FROM users WHERE user_email=? LIMIT 1;";
-                PreparedStatement preparedStatement = db.getPrepStatement(query);
-                preparedStatement.setString(1, email);
-                ResultSet result = preparedStatement.executeQuery();
-
-                if (result.next()) {
-                    String userPass = result.getString("user_password");
+                TypedQuery<Users> queryUserByEmail = entityManager.createNamedQuery("Users.findByUserEmail", Users.class);
+                Users resultUser = queryUserByEmail.getSingleResult();
+                if (resultUser != null) {
+                    String userPass = resultUser.getUserPassword();
                     if (BCrypt.checkpw(password, userPass)) {
                         System.out.println("Password sesuai!");
                         this.dispose();
-                        new Dashboard(result.getInt("user_id")).setVisible(true);
+                        new Dashboard(resultUser.getUserId()).setVisible(true);
                     } else {
                         System.out.println("Password salah!");
                     }
                 } else {
                     this.peringatan("Email/kata sandi salah!");
                 }
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
+                System.out.println(e.getMessage());
             }
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
         this.dispose();
         new FormRegister().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,9 +176,9 @@ public class FormLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnRegister;
     private javax.swing.JTextField inputEmail;
     private javax.swing.JPasswordField inputPassword;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

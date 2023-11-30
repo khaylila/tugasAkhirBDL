@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Output.Customer;
+package Output.Mobil;
 
-import Database.Customer;
+import Database.Cars;
 import Output.FormLogin;
 import Output.MainFrame;
 import javax.persistence.TypedQuery;
@@ -13,38 +13,38 @@ import javax.persistence.TypedQuery;
  *
  * @author milea
  */
-public class FormCustomerEdit extends MainFrame {
+public class FormMobilEdit extends MainFrame {
 
-    int customerId;
-    Customer customer;
+    Cars mobil;
     Object obj;
 
     /**
      * Creates new form ListCustomer
      *
      * @param obj
-     * @param customerId
+     * @param mobilId
      */
-    public FormCustomerEdit(Object obj, int customerId) {
+    public FormMobilEdit(Object obj, int mobilId) {
         initComponents();
-        this.customerId = customerId;
         this.obj = obj;
 
         try {
-            TypedQuery<Customer> cust = entityManager.createNamedQuery("Customer.findByCustomerId", Customer.class);
-            cust.setParameter("cutomerId", this.customerId);
-            Customer resultCustomer = cust.getSingleResult();
-            inputNamaPelanggan.setText(resultCustomer.getCustomerFullname());
-            inputNomorTelpon.setText(resultCustomer.getCustomerTelepon());
-            inputAlamat.setText(resultCustomer.getCustomerAlamat());
-            this.customer = resultCustomer;
+            TypedQuery<Cars> mobil = entityManager.createNamedQuery("Cars.findByMobilId", Cars.class);
+            mobil.setParameter("mobilId", this.mobil.getMobilId());
+            Cars resultMobil = mobil.getSingleResult();
+            inputNamaMobil.setText(resultMobil.getMobilNama());
+            inputPabrikanMobil.setText(resultMobil.getMobilPabrikan());
+            inputTipeMobil.setText(resultMobil.getMobilTipe());
+            inputBesarCc.setText(String.valueOf(resultMobil.getMobilKapasitasMesin()));
+            inputTahunDibuat.setText(resultMobil.getMobilTahun());
+            this.mobil = resultMobil;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             this.peringatan("Data tidak ditemukan!");
         }
     }
 
-    public FormCustomerEdit() {
+    public FormMobilEdit() {
         new FormLogin().setVisible(true);
         this.setVisible(false);
         dispose();
@@ -62,25 +62,24 @@ public class FormCustomerEdit extends MainFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        inputNamaPelanggan = new javax.swing.JTextField();
-        inputNomorTelpon = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        inputAlamat = new javax.swing.JTextArea();
+        inputNamaMobil = new javax.swing.JTextField();
+        inputPabrikanMobil = new javax.swing.JTextField();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        inputBesarCc = new javax.swing.JTextField();
+        inputTipeMobil = new javax.swing.JTextField();
+        inputTahunDibuat = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel2.setText("Nama Pelanggan");
+        jLabel2.setText("Nama Mobil");
 
-        jLabel3.setText("Nomor Telpon");
+        jLabel3.setText("Pabrikan Mobil");
 
-        jLabel4.setText("Alamat");
-
-        inputAlamat.setColumns(20);
-        inputAlamat.setRows(5);
-        jScrollPane1.setViewportView(inputAlamat);
+        jLabel4.setText("Tipe Mobil");
 
         btnUpdate.setBackground(new java.awt.Color(192, 242, 100));
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Img/save-30x30.png"))); // NOI18N
@@ -104,31 +103,37 @@ public class FormCustomerEdit extends MainFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Img/base-50x50.png"))); // NOI18N
         jLabel1.setText("Tambah Project");
 
+        jLabel5.setText("Besar CC");
+
+        jLabel6.setText("Tahun Dibuat");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(166, 166, 166))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(btnDelete)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnUpdate))
+                        .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel2)
                                 .addComponent(jLabel3)
-                                .addComponent(jLabel4))
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6))
                             .addGap(27, 27, 27)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(inputNomorTelpon, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(inputNamaPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnDelete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnUpdate)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(inputNamaMobil, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                                .addComponent(inputPabrikanMobil)
+                                .addComponent(inputTipeMobil)
+                                .addComponent(inputBesarCc)
+                                .addComponent(inputTahunDibuat)))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -139,23 +144,31 @@ public class FormCustomerEdit extends MainFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(inputNamaPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputNamaMobil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputNomorTelpon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputPabrikanMobil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(inputTipeMobil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputBesarCc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputTahunDibuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnUpdate)
-                            .addComponent(btnDelete))
-                        .addGap(0, 70, Short.MAX_VALUE))))
+                            .addComponent(btnDelete))))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -164,26 +177,30 @@ public class FormCustomerEdit extends MainFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        String namaPelanggan = inputNamaPelanggan.getText().trim();
-        String telpon = inputNomorTelpon.getText().trim();
-        String alamat = inputAlamat.getText().trim();
-        if (namaPelanggan.isEmpty() || telpon.isEmpty() || alamat.isEmpty()) {
+        String namaMobil = inputNamaMobil.getText().trim();
+        String pabrikanMobil = inputPabrikanMobil.getText().trim();
+        String tipeMobil = inputTipeMobil.getText().trim();
+        String besarCcMobil = inputBesarCc.getText().trim();
+        String tahunMobil = inputTahunDibuat.getText().trim();
+        if (namaMobil.isEmpty() || pabrikanMobil.isEmpty() || tipeMobil.isEmpty() || besarCcMobil.isEmpty() || tahunMobil.isEmpty()) {
             this.peringatan("Data tidak boleh kosong!");
         } else {
             try {
-                Customer cust = this.customer;
-                cust.setCustomerFullname(namaPelanggan);
-                cust.setCustomerTelepon(telpon);
-                cust.setCustomerAlamat(alamat);
+                Cars mobil = this.mobil;
+                mobil.setMobilNama(namaMobil);
+                mobil.setMobilPabrikan(pabrikanMobil);
+                mobil.setMobilTipe(tipeMobil);
+                mobil.setMobilKapasitasMesin(Integer.parseInt(besarCcMobil));
+                mobil.setMobilTahun(tahunMobil);
                 entityManager.getTransaction().begin();
-                entityManager.merge(cust);
+                entityManager.merge(mobil);
                 entityManager.getTransaction().commit();
 
-                this.peringatan("Berhasil mengubah data customer!");
+                this.peringatan("Berhasil mengubah data mobil!");
                 this.dispose();
-                ((CariCustomer) obj).loadTabel();
-            } catch (Exception e) {
-                this.peringatan("Gagal mengubah data customer!");
+                ((CariMobil) obj).loadTabel();
+            } catch (NumberFormatException e) {
+                this.peringatan("Gagal mengubah data mobil!");
                 System.out.println(e.getMessage());
                 entityManager.getTransaction().rollback();
             }
@@ -194,15 +211,15 @@ public class FormCustomerEdit extends MainFrame {
         // TODO add your handling code here:
         try {
             entityManager.getTransaction().begin();
-            entityManager.remove(this.customer);
+            entityManager.remove(this.mobil);
             entityManager.getTransaction().commit();
-            this.peringatan("Berhasil menghapus customer!");
+            this.peringatan("Berhasil menghapus mobil!");
             this.dispose();
-            ((CariCustomer) obj).loadTabel();
+            ((CariMobil) obj).loadTabel();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             System.out.println(e.getMessage());
-            this.peringatan("Gagal menghapus data customer!");
+            this.peringatan("Gagal menghapus data mobil!");
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -223,14 +240,18 @@ public class FormCustomerEdit extends MainFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormCustomerEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormMobilEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormCustomerEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormMobilEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormCustomerEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormMobilEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormCustomerEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormMobilEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -239,7 +260,7 @@ public class FormCustomerEdit extends MainFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormCustomerEdit().setVisible(true);
+                new FormMobilEdit().setVisible(true);
             }
         });
     }
@@ -247,13 +268,16 @@ public class FormCustomerEdit extends MainFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JTextArea inputAlamat;
-    private javax.swing.JTextField inputNamaPelanggan;
-    private javax.swing.JTextField inputNomorTelpon;
+    private javax.swing.JTextField inputBesarCc;
+    private javax.swing.JTextField inputNamaMobil;
+    private javax.swing.JTextField inputPabrikanMobil;
+    private javax.swing.JTextField inputTahunDibuat;
+    private javax.swing.JTextField inputTipeMobil;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }

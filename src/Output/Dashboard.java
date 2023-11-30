@@ -4,9 +4,7 @@
  */
 package Output;
 
-import Output.Customer.ListCustomer;
-import Output.Mobil.ListMobil;
-import Output.Warna.ListWarna;
+import Output.Project.listProject;
 
 /**
  *
@@ -15,20 +13,23 @@ import Output.Warna.ListWarna;
 public class Dashboard extends javax.swing.JFrame {
 
     int userId;
+    int xx, xy;
 
     /**
      * Creates new form Dashboard
+     *
      * @param userId
      */
     public Dashboard(int userId) {
         this.userId = userId;
         initComponents();
     }
-    
-    public  Dashboard(){
+
+    public Dashboard() {
         new FormLogin().setVisible(true);
         this.setVisible(false);
         dispose();
+//        initComponents();
     }
 
     /**
@@ -40,85 +41,229 @@ public class Dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnCustomer = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        btnProject = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnWarna = new javax.swing.JButton();
-        btnMobil = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnKeluar = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        panelMain = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        btnCustomer.setText("Customer");
-        btnCustomer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCustomerActionPerformed(evt);
+        setTitle("Dashboard - Bengkel Kuy");
+        setUndecorated(true);
+        setResizable(false);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
-        jLabel1.setText("Bengkel Mobil Dashboard");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(260, 720));
+        jPanel1.setMinimumSize(new java.awt.Dimension(260, 720));
+        jPanel1.setPreferredSize(new java.awt.Dimension(260, 720));
 
-        btnWarna.setText("Warna");
-        btnWarna.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnWarnaActionPerformed(evt);
+        btnProject.setMaximumSize(new java.awt.Dimension(220, 40));
+        btnProject.setMinimumSize(new java.awt.Dimension(220, 40));
+        btnProject.setPreferredSize(new java.awt.Dimension(220, 40));
+        btnProject.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProjectMouseClicked(evt);
             }
         });
 
-        btnMobil.setText("Mobil");
-        btnMobil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMobilActionPerformed(evt);
+        jLabel1.setFont(new java.awt.Font("Poppins", 0, 15)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Img/task-30x30.png"))); // NOI18N
+        jLabel1.setText("Project");
+
+        javax.swing.GroupLayout btnProjectLayout = new javax.swing.GroupLayout(btnProject);
+        btnProject.setLayout(btnProjectLayout);
+        btnProjectLayout.setHorizontalGroup(
+            btnProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnProjectLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        btnProjectLayout.setVerticalGroup(
+            btnProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnProjectLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel4.setMaximumSize(new java.awt.Dimension(220, 40));
+        jPanel4.setMinimumSize(new java.awt.Dimension(220, 40));
+        jPanel4.setPreferredSize(new java.awt.Dimension(220, 40));
+
+        jLabel2.setFont(new java.awt.Font("Poppins", 0, 15)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Img/task-30x30.png"))); // NOI18N
+        jLabel2.setText("Sparepart & Jasa");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(4, Short.MAX_VALUE))
+        );
+
+        jLabel3.setFont(new java.awt.Font("Poppins SemiBold", 0, 24)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Img/base-50x50.png"))); // NOI18N
+        jLabel3.setText("Bengkel Kuyyy");
+
+        btnKeluar.setMaximumSize(new java.awt.Dimension(220, 40));
+        btnKeluar.setMinimumSize(new java.awt.Dimension(220, 40));
+        btnKeluar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnKeluarMouseClicked(evt);
             }
         });
+
+        jLabel4.setFont(new java.awt.Font("Poppins", 0, 15)); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Img/task-30x30.png"))); // NOI18N
+        jLabel4.setText("Keluar");
+
+        javax.swing.GroupLayout btnKeluarLayout = new javax.swing.GroupLayout(btnKeluar);
+        btnKeluar.setLayout(btnKeluarLayout);
+        btnKeluarLayout.setHorizontalGroup(
+            btnKeluarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnKeluarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        btnKeluarLayout.setVerticalGroup(
+            btnKeluarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnKeluarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnProject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnKeluar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(20, 20, 20)
+                .addComponent(btnProject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 500, Short.MAX_VALUE)
+                .addComponent(btnKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel2.setMaximumSize(new java.awt.Dimension(1020, 100));
+        jPanel2.setMinimumSize(new java.awt.Dimension(1020, 100));
+        jPanel2.setPreferredSize(new java.awt.Dimension(1020, 100));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1020, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        panelMain.setBackground(new java.awt.Color(255, 204, 255));
+        panelMain.setMaximumSize(new java.awt.Dimension(980, 580));
+        panelMain.setMinimumSize(new java.awt.Dimension(980, 580));
+        panelMain.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnMobil, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnWarna, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCustomer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(20, 20, 20)
+                        .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(20, 20, 20))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(btnCustomer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnWarna)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMobil)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
+    private void btnProjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProjectMouseClicked
         // TODO add your handling code here:
-        new ListCustomer(userId).setVisible(true);
-    }//GEN-LAST:event_btnCustomerActionPerformed
+        panelMain.removeAll();
+        panelMain.add(new listProject(userId));
+        panelMain.repaint();
+        panelMain.revalidate();
+    }//GEN-LAST:event_btnProjectMouseClicked
 
-    private void btnWarnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWarnaActionPerformed
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         // TODO add your handling code here:
-        new ListWarna(userId).setVisible(true);
-    }//GEN-LAST:event_btnWarnaActionPerformed
+        this.xx = evt.getX();
+        this.xy = evt.getY();
+    }//GEN-LAST:event_formMousePressed
 
-    private void btnMobilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMobilActionPerformed
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         // TODO add your handling code here:
-        new ListMobil(userId).setVisible(true);
-    }//GEN-LAST:event_btnMobilActionPerformed
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_formMouseDragged
+
+    private void btnKeluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKeluarMouseClicked
+        // TODO add your handling code here:
+        System.exit(WIDTH);
+    }//GEN-LAST:event_btnKeluarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -156,9 +301,15 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCustomer;
-    private javax.swing.JButton btnMobil;
-    private javax.swing.JButton btnWarna;
+    private javax.swing.JPanel btnKeluar;
+    private javax.swing.JPanel btnProject;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel panelMain;
     // End of variables declaration//GEN-END:variables
 }
